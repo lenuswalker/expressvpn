@@ -13,7 +13,7 @@ expressvpn preferences set network_lock on
 expressvpn preferences set auto_connect true
 expressvpn connect $SERVER
 
-/bin/bash /expressvpn/routing.sh
+#/bin/bash /expressvpn/routing.sh
 
 touch /var/log/temp.log
 tail -f /var/log/temp.log
