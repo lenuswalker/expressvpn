@@ -1,12 +1,12 @@
 FROM debian:bullseye-slim
 
+ARG NUM
+ARG PLATFORM
 ENV CODE="code"
 ENV SERVER="smart"
 ENV HEALTHCHECK=""
 ENV BEARER=""
-ARG NUM
-ARG PLATFORM
-ARG VERSION="expressvpn_${NUM}-1_${PLATFORM}.deb"
+ENV VERSION="expressvpn_$NUM-1_$PLATFORM.deb"
 
 COPY files/ /expressvpn/
 
