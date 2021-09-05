@@ -4,7 +4,7 @@ ENV CODE="code"
 ENV SERVER="smart"
 ENV HEALTHCHECK=""
 ENV BEARER=""
-ARG NUM
+ARG NUM="3.10.0.9"
 ARG PLATFORM="armhf"
 ARG VERSION="expressvpn_${NUM}-1_${PLATFORM}.deb"
 
