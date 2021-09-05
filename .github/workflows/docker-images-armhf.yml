@@ -23,7 +23,7 @@ jobs:
           flavor: |
             latest=false
             prefix=
-            surfix=-armhf
+            suffix=-armhf
           tags: |
             type=ref,event=branch
       - name: Set up QEMU

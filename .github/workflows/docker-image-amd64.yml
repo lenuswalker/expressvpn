@@ -22,7 +22,7 @@ jobs:
           flavor: |
             latest=true
             prefix=
-            surfix=-amd64
+            suffix=-amd64
           tags: |
             type=sha,prefix=sha-,format=short
             type=ref,event=branch
