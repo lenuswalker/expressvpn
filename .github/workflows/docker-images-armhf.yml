@@ -40,6 +40,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
+        env:
+          NUM: '3.10.0.9'
+          PLATFORM: 'armhf'
         uses: docker/build-push-action@v2 
         with:
           context: .
@@ -49,6 +52,3 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          env:
-            NUM: '3.10.0.9'
-            PLATFORM: 'armhf'
