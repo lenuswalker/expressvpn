@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker buildx build --build-arg NUM=3.10.0.9 --build-arg PLATFORM=arm64v8 --platform linux/arm64/v8 --tag lenuswalker/expressvpn:arm64v8 .
+      run: docker buildx build --build-arg NUM=3.10.0.9 --build-arg PLATFORM=armhf --platform linux/arm64/v8 --tag lenuswalker/expressvpn:arm64v8 .
