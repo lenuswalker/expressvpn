@@ -16,6 +16,9 @@ AMD64
 Raspberry Pi
 `docker buildx build --build-arg NUM=EXPRESSVPN_VERSION --build-arg PLATFORM=armhf --platform linux/arm/v7 -t REPOSITORY/APP:VERSION-armhf .`
 
+Created some docker workflows to take care of this.
+
+
 ## Download
 
 `docker pull lenuswalker/expressvpn`
@@ -70,6 +73,7 @@ Another container that will use ExpressVPN network:
     environment:
 	    - CODE=${CODE} # Activation Code from ExpressVPN https://www.expressvpn.com/support/troubleshooting/find-activation-code/
 	    - SERVER=SMART # By default container will connect to smart location, list of available locations you can find below
+      - NETWORK=192.168.0.0/24
 	    - DDNS=yourDDNSdomain # optional
 	    - IP=yourStaticIP # optional - won't work if DDNS is setup
 	    - BEAERER=ipinfo_access_token # optional can be taken from ipinfo.io
@@ -82,6 +86,28 @@ Another container that will use ExpressVPN network:
     tty: true
     command: /bin/bash
     privileged: true
+```
+
+## Routing on Host Machine
+To properly route packets from the local network to the docker container, we must make changes to routing and iptables on the host machine.
+
+First get the ip from your expressvpn container
+```
+  # Get IP of Docker Container
+  docker exec -it expressvpn ip -o addr show dev eth0 | awk '$3 == "inet" {print $4}'
+
+  # Create new routing table
+  echo "2   vpn" >> /etc/iproute2/rt_tables
+
+  # Make route and rules
+  ip rule add from YOUR_NETWORK table vpn # YOUR_NETWORK can be replaced with your actual network such as 192.168.0.0/24
+  ip route add default via EXPRESS_VPN_IP table vpn # EXPRESS_VPN_IP comes from the first command. It can be 172.17.0.2.
+
+  # iptables rules for forwarding traffic to the container
+  iptables -A INPUT -s YOUR_NETWORK -j ACCEPT # YOUR_NETWORK can be replaced with your actual network such as 192.168.0.0/24
+  iptables -A FORWARD -d YOUR_NETWORK -j ACCEPT # YOUR_NETWORK can be replaced with your actual network such as 192.168.0.0/24
+  iptables -A FORWARD -s YOUR_NETWORK -j ACCEPT # YOUR_NETWORK can be replaced with your actual network such as 192.168.0.0/24
+  iptables -A OUTPUT -d YOUR_NETWORK -j ACCEPT # YOUR_NETWORK can be replaced with your actual network such as 192.168.0.0/24
 ```
 
 ## HEALTHCHECK
