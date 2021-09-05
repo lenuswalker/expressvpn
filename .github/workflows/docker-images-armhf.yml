@@ -47,22 +47,5 @@ jobs:
           #platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
           platforms: linux/arm/v7
           push: ${{ github.event_name != 'pull_request' }}
-          tags: |
-            ${{ steps.meta.outputs.tags }}
-            ${{ github.repository }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      - name: Push latest
-        uses: docker/build-push-action@v2
-        if: steps.git.outputs.tag == 'true'
-        with:
-          platforms: linux/arm/v7
-          push: true
-          tags: |
-            ${{ github.repository }}:latest-arm32v7
-      - name: Update repo description
-        uses: peter-evans/dockerhub-description@v2.4.3
-        if: steps.git.outputs.tag == 'true'
-        with:
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: ${{ github.repository }}
