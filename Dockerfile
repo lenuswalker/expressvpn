@@ -4,8 +4,8 @@ ENV CODE="code"
 ENV SERVER="smart"
 ENV HEALTHCHECK=""
 ENV BEARER=""
-ARG NUM="3.10.0.9"
-ARG PLATFORM="armhf"
+ARG NUM
+ARG PLATFORM
 ARG VERSION="expressvpn_${NUM}-1_${PLATFORM}.deb"
 
 COPY files/ /expressvpn/
