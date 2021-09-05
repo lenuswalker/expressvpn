@@ -93,17 +93,19 @@ To properly route packets from the local network to the docker container, we mus
 
 First get the ip from your expressvpn container
 ```
-  # Get IP of Docker Container
   docker exec -it expressvpn ip -o addr show dev eth0 | awk '$3 == "inet" {print $4}'
-
-  # Create new routing table
+```
+Create new routing table
+```
   echo "2   vpn" >> /etc/iproute2/rt_tables
-
-  # Make route and rules
+```
+Routing through the table
+```
   ip rule add from YOUR_NETWORK table vpn # YOUR_NETWORK can be replaced with your actual network such as 192.168.0.0/24
   ip route add default via EXPRESS_VPN_IP table vpn # EXPRESS_VPN_IP comes from the first command. It can be 172.17.0.2.
-
-  # iptables rules for forwarding traffic to the container
+```
+iptable rules for forwarding routed traffic to the container
+```
   iptables -A INPUT -s YOUR_NETWORK -j ACCEPT # YOUR_NETWORK can be replaced with your actual network such as 192.168.0.0/24
   iptables -A FORWARD -d YOUR_NETWORK -j ACCEPT # YOUR_NETWORK can be replaced with your actual network such as 192.168.0.0/24
   iptables -A FORWARD -s YOUR_NETWORK -j ACCEPT # YOUR_NETWORK can be replaced with your actual network such as 192.168.0.0/24
