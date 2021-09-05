@@ -23,7 +23,6 @@ jobs:
             latest=true
             prefix=amd64
           tags: |
-            # type=raw,value=latest,enable=${{ endsWith(GitHub.ref, ‘master’) }}
             type=sha,prefix=sha-,format=short
             type=ref,event=branch
       - name: Set up QEMU
