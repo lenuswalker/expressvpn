@@ -22,9 +22,9 @@ jobs:
           images: lenuswalker/expressvpn  # list of Docker images to use as base name for tags
           flavor: |
             latest=false
-            prefix=arm32v7
+            prefix=
+            surfix=-armhf
           tags: |
-            type=sha,prefix=sha-,format=short
             type=ref,event=branch
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1

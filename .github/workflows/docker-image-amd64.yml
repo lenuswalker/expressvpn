@@ -21,7 +21,8 @@ jobs:
           images: lenuswalker/expressvpn  # list of Docker images to use as base name for tags
           flavor: |
             latest=true
-            prefix=amd64
+            prefix=
+            surfix=-amd64
           tags: |
             type=sha,prefix=sha-,format=short
             type=ref,event=branch
