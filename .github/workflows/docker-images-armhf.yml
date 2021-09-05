@@ -41,7 +41,9 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          build-args: PLATFORM=armhf,NUM=3.10.0.9
+          build-args: |
+            PLATFORM=armhf
+            NUM=3.10.0.9
           #platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
           platforms: linux/arm/v7
           push: ${{ github.event_name != 'pull_request' }}
