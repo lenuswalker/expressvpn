@@ -102,6 +102,7 @@ Create new routing table
 Routing through the table
 ```
   ip rule add from YOUR_NETWORK table vpn # YOUR_NETWORK can be replaced with your actual network such as 192.168.0.0/24
+  ip route add YOUR_NETWORK via YOUR_HOST_IP table vpn # need this for local routing.
   ip route add default via EXPRESS_VPN_IP table vpn # EXPRESS_VPN_IP comes from the first command. It can be 172.17.0.2.
 ```
 iptable rules for forwarding routed traffic to the container
