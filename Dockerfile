@@ -2,9 +2,9 @@ FROM debian:bullseye-slim
 
 ARG NUM
 ARG PLATFORM
-ENV HEALTHCHECK=""
-ENV BEARER=""
-ENV VERSION="expressvpn_$NUM-1_$PLATFORM.deb"
+ENV HEALTHCHECK ""
+ENV BEARER ""
+ENV VERSION expressvpn_$NUM-1_$PLATFORM.deb
 
 COPY files/ /expressvpn/
 
@@ -15,8 +15,7 @@ RUN apt update && apt install -y --no-install-recommends \
     && rm -rf /expressvpn/*.deb \
     && rm -rf /var/lib/apt/lists/* \
     && apt purge --autoremove -y wget \
-    && rm -rf /var/log/*.log \
-    && chmod +x /expressvpn/*
+    && rm -rf /var/log/*.log 
 
 HEALTHCHECK --start-period=30s --timeout=5s --interval=2m --retries=3 CMD bash /expressvpn/healthcheck.sh
 

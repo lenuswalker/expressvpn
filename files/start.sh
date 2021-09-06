@@ -1,5 +1,7 @@
 #!/bin/bash
-
+cp /etc/resolv.conf /tmp/resolv.conf
+su -c 'umount /etc/resolv.conf'
+cp /tmp/resolv.conf /etc/resolv.conf
 sed -i 's/DAEMON_ARGS=.*/DAEMON_ARGS=""/' /etc/init.d/expressvpn
 
 # iptables routing
@@ -20,4 +22,4 @@ expressvpn connect $SERVER
 touch /var/log/temp.log
 tail -f /var/log/temp.log
 
-#exec "$@"
+exec "$@"

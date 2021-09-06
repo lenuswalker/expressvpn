@@ -36,7 +36,7 @@ Created some docker workflows to take care of this.
     --tty=true \
     --name=expressvpn \
 	  --publish 80:80 \
-    --env=NETWORK=192.168.0.0/24 \
+	  --env=NETWORK=192.168.0.0/24 \
 	  --env=DDNS=domain \ #optional
 	  --env=IP=yourIP \ #optional
 	  --env=BEARER=ipinfo_access_token \ #optional
@@ -73,7 +73,7 @@ Another container that will use ExpressVPN network:
     environment:
 	    - CODE=${CODE} # Activation Code from ExpressVPN https://www.expressvpn.com/support/troubleshooting/find-activation-code/
 	    - SERVER=SMART # By default container will connect to smart location, list of available locations you can find below
-      - NETWORK=192.168.0.0/24
+	    - NETWORK=192.168.0.0/24
 	    - DDNS=yourDDNSdomain # optional
 	    - IP=yourStaticIP # optional - won't work if DDNS is setup
 	    - BEAERER=ipinfo_access_token # optional can be taken from ipinfo.io
