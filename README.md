@@ -2,10 +2,10 @@
 
 Container based on [polkaned/expressvpn](https://hub.docker.com/r/polkaned/expressvpn) & [misioslav/expressvpn](https://hub.docker.com/r/misioslav/expressvpn)version. This is my attempt mostly to learn more about docker.
 
-ExpressVPN version: `3.10.0.9`
+ExpressVPN version: `3.11.0.16`
 Currently set to use `lightway_udp` protocol with `chacha20` cipher.
 
-Experimental -> arm version available with tag `armhf` from version `3.8.0.4`.
+Experimental -> arm version available with tag `armhf` from version `3.10.0.9`.
 I currently do not own Raspberry Pi of any kind to test this version, but feel free to let me know via GitHub if anything does not work properly.
 
 ## Build
