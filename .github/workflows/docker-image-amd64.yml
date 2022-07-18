@@ -40,7 +40,7 @@ jobs:
           file: ./Dockerfile
           build-args: |
             PLATFORM=amd64
-            NUM=3.14.0.4
+            NUM=3.27.1.0
           #platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
           platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
