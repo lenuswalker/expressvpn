@@ -10,13 +10,13 @@ ENV CIPHER="chacha20"
 
 ARG NUM
 ARG PLATFORM
-
+RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY files/ /expressvpn/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     expect curl ca-certificates iproute2 wget jq iptables \
     && wget -q https://www.expressvpn.works/clients/linux/expressvpn_${NUM}-1_${PLATFORM}.deb -O /expressvpn/expressvpn_${NUM}-1_${PLATFORM}.deb \
-    && dpkg -i /expressvpn/expressvpn_${NUM}-1_${PLATFORM}.deb \
+    && apt-get purge --autoremove -y wget \
     && rm -rf /expressvpn/*.deb \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get purge --autoremove -y wget \
